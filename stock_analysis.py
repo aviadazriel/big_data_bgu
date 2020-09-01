@@ -1,4 +1,6 @@
 from utils import *
+from preprocess import *
+
 def load_stock_prices(sector, dict_stock_sector, url):
 
   stocks = dict_stock_sector[sector]
