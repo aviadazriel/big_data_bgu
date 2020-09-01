@@ -1,4 +1,6 @@
 from utils import *
+from preprocess import *
+
 from gensim.models.callbacks import PerplexityMetric
 
 #prepair the data 
