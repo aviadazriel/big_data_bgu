@@ -11,6 +11,7 @@ The code was originally written in AWS and we changed it so that it can run on a
 More Information about the word2vec model can be found on Genesim's website: https://radimrehurek.com/gensim/models/word2vec.html
 """
 from utils import *
+from preprocess import *
 from gensim.test.utils import get_tmpfile
 from gensim.models.callbacks import CallbackAny2Vec
 from gensim.models import Word2Vec
