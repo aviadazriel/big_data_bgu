@@ -1,4 +1,5 @@
 from utils import *
+from preprocess import *
 from gensim.models.callbacks import PerplexityMetric
 from gensim.models import Word2Vec
 from gensim.test.utils import get_tmpfile
