@@ -1,3 +1,4 @@
+from utils import *
 def load_data(input_url, filter_word=None, remove_leader_tweet=False, random_sample = None):
   # Get file names:
   file_list = []
