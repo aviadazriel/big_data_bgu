@@ -1,4 +1,5 @@
 from utils import *
+from preprocess import *
 from pylab import rcParams
 
 def get_subjectivity(text):
