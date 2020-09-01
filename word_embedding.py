@@ -23,8 +23,10 @@ class EpochLogger(CallbackAny2Vec):
      def on_epoch_begin(self, model):
          print("Epoch #{} start".format(self.epoch))
      def on_epoch_end(self, model):
-        #  print("Epoch #{} end".format(self.epoch))
-         self.epoch += 1
+        loss = model.get_latest_training_loss()
+        print('Loss after epoch {}: {}'.format(self.epoch, loss))
+        self.epoch += 1
+
 epoch_logger = EpochLogger()
 #prepair the data 
 sfraim_path = 'all_tweets.sframe'
@@ -40,6 +42,7 @@ min_text_len = 2
 min_word_len = 3
 sf['clean_text'] = sf['text'].apply(lambda x: preprocess_tweet(tweet=x, min_text_len=min_text_len, min_word_len=min_word_len))                                                                      
 sf = sf[['clean_text']]
+sf = sf.dropna()
 sf.materialize()
 
 #tokens
