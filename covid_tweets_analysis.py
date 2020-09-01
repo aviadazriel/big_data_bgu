@@ -39,7 +39,6 @@ class EpochLogger(CallbackAny2Vec):
      def on_epoch_begin(self, model):
          print("Epoch #{} start".format(self.epoch))
      def on_epoch_end(self, model):
-        #  print("Epoch #{} end".format(self.epoch))
          self.epoch += 1
          
 def get_topics_per_doc(ldamodel, corpus):
@@ -75,7 +74,7 @@ input_url = './drive/My Drive/big_data/tables/covid Tweets.csv'
 covid_df = pd.read_csv(input_url,low_memory=False)
 print(f'covid df shape {covid_df.shape[0]}')
 
-"""##Data preprocessing"""
+"""Data preprocessing"""
 
 # Data preprocessing:
 cols = ['created_at','id','source', 'text','in_reply_to_status_id','in_reply_to_user_id','user.id','State_abbv']
@@ -249,7 +248,7 @@ for i in range(len(tokens)):
     wordvec_arrays[i,:] = word_vector(tokens[i], 300)
 wordvec_df = pd.DataFrame(wordvec_arrays)
 
-"""##Visualization tweets using PCA"""
+"""Visualization tweets using PCA"""
 
 # Visualization tweets using PCA:
 pca = PCA(n_components=2)
