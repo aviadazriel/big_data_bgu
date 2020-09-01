@@ -1,3 +1,56 @@
+import warnings
+import pandas as pd
+pd.set_option("display.max_colwidth", 200) 
+warnings.filterwarnings("ignore", category=DeprecationWarning) 
+import os
+import emoji
+import spacy
+from pylab import rcParams
+from scipy.signal import savgol_filter
+import _pickle as cPickle
+from sklearn.decomposition import PCA
+import gensim
+import gensim.corpora as corpora
+from gensim.utils import simple_preprocess
+from gensim.models import CoherenceModel
+import copy
+import datetime
+import plotly.graph_objs as go
+from plotly.subplots import make_subplots
+from collections import Counter
+import pandas as pd
+from tqdm import tqdm
+from wordcloud import WordCloud
+from dateutil import parser
+from nltk.stem import WordNetLemmatizer
+from plotly.offline import iplot
+import seaborn as sns
+import re
+import nltk
+import string
+from wordcloud import WordCloud
+from PIL import Image
+import codecs
+import cv2
+import numpy as np
+from string import punctuation 
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from sklearn.feature_extraction.text import CountVectorizer
+from collections import defaultdict
+from sklearn.decomposition import LatentDirichletAllocation
+import plotly.express as px
+from textblob import TextBlob
+import pyLDAvis
+import turicreate as tc
+import pyLDAvis.gensim
+import matplotlib.pyplot as plt
+# %matplotlib inline
+tqdm.pandas()
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
+
 def word_vector(tokens, size):
     vec = np.zeros(size).reshape((1, size))
     count = 0
