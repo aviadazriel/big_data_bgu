@@ -4,12 +4,12 @@ import multiprocessing as mp
 
 from gensim.models.callbacks import PerplexityMetric
 
-def create_lda_turicreate(sframe, path_target):
+def create_lda_turicreate(sframe, num_topics = 100, path_target = './'):
   # Create BOW:
   docs = tc.text_analytics.count_words(random_tweets_sf['clean_text'])
   # Train a topic model:
   tc.config.set_runtime_config('TURI_DEFAULT_NUM_PYLAMBDA_WORKERS', mp.cpu_count()-2)
-  num_topics = 130
+  num_topics = num_topics
   num_iterations = 100
   topic_model = tc.topic_model.create(docs, num_topics=num_topics, num_iterations=num_iterations)
   
@@ -17,14 +17,14 @@ def create_lda_turicreate(sframe, path_target):
   topic_model.save(path_target)
   return topic_model
 
-def create_lda_gensim(sframe, path_target):
+def create_lda_gensim(sframe, num_topics = 100, path_target = './'):
   
   # Create bigrams:
   min_count=5
   threshold=100
-  bigram = gensim.models.Phrases(sf['tokens'], min_count=min_count, threshold=threshold)
+  bigram = gensim.models.Phrases(sframe['tokens'], min_count=min_count, threshold=threshold)
   bigram_mod = gensim.models.phrases.Phraser(bigram)
-  unigram_and_bigram = [bigram_mod[tweet] for tweet in sf['tokens']]
+  unigram_and_bigram = [bigram_mod[tweet] for tweet in sframe['tokens']]
   # Create Dictionary:
   id2word = corpora.Dictionary(unigram_and_bigram)
 
@@ -36,11 +36,11 @@ def create_lda_gensim(sframe, path_target):
   coherence_logger  = gensim.models.callbacks.CoherenceMetric(corpus=corpus, coherence="u_mass", logger='shell')
 
   # Config:
-  num_topics = 4
+  num_topics = num_topics
   random_state = 11
   update_every = 1
   chunksize = 5000
-  passes=10
+  passes=10 #if you going to run the model more than 10M document - tou should think about reduce this number
   alpha='auto'
   per_word_topics=True
 
@@ -64,6 +64,8 @@ def create_lda_gensim(sframe, path_target):
   # Show topics:
   for index, topic in lda_model.show_topics(formatted=False, num_words= 10):
     print('Topic: {} \nWords: {}'.format(index+1, [w[0] for w in topic]))
+  
+  return lda_model
 
   
 #prepair the data 
